@@ -1,3 +1,164 @@
+#root {
+  height: 100%
+}
+body{
+  height: 100%
+}
+button{
+  background-color: #3b424c;
+  border-color: #3b424c;
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+}
+button:hover{
+  background-color: #2d323a;
+  border-color: #2d323a;
+  color: #fff;
+  cursor: pointer;
+}
+.LinkButton{
+  background-color: #3b424c;
+  border-color: #3b424c;
+  color: #fff;
+}
+.LinkButton:hover{
+  background-color: #2d323a;
+  border-color: #2d323a;
+  color: #fff;
+
+}
+.HeaderIcon{
+  font-size: 32px;
+  padding-left: 5px; 
+  color: #fff
+}
+.HeaderIcon:hover{
+  transition-duration: 250ms;
+}
+.CatalogCard{
+  margin: .5rem 0 1rem 0;
+  background-color: #fff;
+  border-radius: 2px;
+  -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 3px 1px -2px rgba(0,0,0,0.12), 0 1px 5px 0 rgba(0,0,0,0.2);
+  transition: box-shadow 250ms linear;
+}
+.CatalogCard:hover{
+ -webkit-box-shadow: 0 2px 2px 0 rgba(0,0,0,0.5), 0 3px 1px -2px rgba(0,0,0,0.5), 0 1px 5px 0 rgba(0,0,0,0.5);
+  box-shadow: 0 2px 2px 0 rgba(0,0,0,0.5), 0 3px 1px -2px rgba(0,0,0,0.5), 0 1px 5px 0 rgba(0,0,0,0.5);
+  transition: box-shadow 250ms linear;
+}
+.CatalogCardImage{
+  width: 100%!important;
+  height: 330px!important;
+}
+
+.CatalogCardTitleContainer{
+  position: absolute;
+  bottom: 16px;
+  left: 0;
+  width: 90%;
+  padding: 24px;
+  margin-right: 15px;
+  margin-left: 15px;
+  background: #ffffff; /* Old browsers */
+  background: -moz-linear-gradient(top, #ffffff 0%, #000000 100%); /* FF3.6-15 */
+  background: -webkit-linear-gradient(top, #ffffff 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+  background: linear-gradient(to bottom, rgba(255,255,255,0),rgba(0,0,0,1)); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+.CatalogCardTitle{
+  color: #fff;
+
+}
+.upload-btn-wrapper {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+.upload-btn {
+  border: 2px solid gray;
+  color: gray;
+  background-color: white;
+  padding: 8px 20px;
+  border-radius: 8px;
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.upload-btn-wrapper input[type=file] {
+  font-size: 100px;
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+}
+input[type=file]::-webkit-file-upload-button {
+  background-color: #3b424c;
+  border-color: #3b424c;
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+}
+input[type=file]::-webkit-file-upload-button:hover {
+  background-color: #2d323a;
+  border-color: #2d323a;
+  color: #fff;
+  cursor: pointer;
+}
+.DetailCardTitle{
+  background-color: #3b424c;
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+ 
+}
+.DetailCardContainer{
+  border: 1px solid rgba(0,0,0,.125);
+}
+.DetailCardTitleText{
+  font-size: 1.5rem;
+  margin: 0;
+}
+.DetailCardBorderTop{
+  border-top: 1px solid rgba(0,0,0,.125);
+}
+.tagContainer{
+  margin: 2px;
+}
+.LoginContainer{
+  position: absolute; /* or absolute */
+  top: 50%;
+  left: 50%;
+}
+
+/*sm*/
+@media (min-width: 576px){
+  .CatalogCardTitleContainer{
+    width: 89%;
+  }
+} 
+/*md*/
+@media (min-width: 768px){
+  .CatalogCardTitleContainer{
+    width: 92%;
+  }
+}
+/*lg*/ 
+@media (min-width: 992px){
+  .CatalogCardTitleContainer{
+    width: 88%;
+  }
+}
+/*xl*/
+@media (min-width: 1200px){
+  .CatalogCardTitleContainer{
+    width: 90%;
+  }
+}
+
 body {
   margin: 0;
   padding: 0;
@@ -11,4 +172,10 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
     monospace;
+}
+.Header{
+  height: 50px;
+  background-color: #3b424c;
+  width: 100%;
+  display: flex;
 }

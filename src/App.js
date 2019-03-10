@@ -1,33 +1,36 @@
 import React, { Component } from 'react';
-import UploadForm from "./Components/Upload/UploadForm"
-import Catalogs from './Components/Catalog/CatalogView';
-import ChapterUpload from './Components/Upload/ChapterUpload/ChapterUpload';
-class App extends Component {
-  componentDidMount(){
-  }
-  test(){
-    fetch('http://localhost:8000/test/', {
-      method: "GET",
-    }).then(response =>{
-        return response.json()
-    }).then((response) => {
-        console.log(response);
-    }).catch(error => {
-        console.log(error);
-    });
-  }
-  render() {
 
+import thunkMiddleware from 'redux-thunk';
+import { createLogger } from 'redux-logger';
+import {createStore, applyMiddleware } from 'redux';
+import { Provider } from 'react-redux';
+import {UserReducer} from "./Redux/Reducer"
+import Layout from './Components/Layout/Layout';
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage'
+import { PersistGate } from 'redux-persist/integration/react'
+import { routerMiddleware } from 'react-router-redux'
+
+/*const persistConfig = {
+  key: 'root',
+  storage,
+}*/
+ 
+//const persistedReducer = persistReducer(persistConfig, UserReducer)
+const loggerMiddleware = createLogger();
+const store = createStore(UserReducer,applyMiddleware(
+  thunkMiddleware, // pro async metody
+  loggerMiddleware, // Debug logger
+ // routerMiddleware(browserHistory),
+));
+//let persistor = persistStore(store)
+class App extends Component {
+  render() {
     return (
-      <div className="container">
-        <ChapterUpload book_id="Berserk"/>
-        <button onClick={this.test}>Test</button>
-      </div>
+      <Provider store={store}>
+          <Layout></Layout>
+    </Provider>
     );
   }
 }
-/* <UploadForm/>
-<Catalogs/>*/
-//  <button onClick={this.test}>Test</button>
-
 export default App;
