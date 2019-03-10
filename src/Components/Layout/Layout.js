@@ -4,14 +4,14 @@ import Catalogs from '../Catalog/CatalogView';
 import ChapterUpload from '../Upload/ChapterUpload/ChapterUpload';
 import Login from '../Login/Login';
 import {
-  BrowserRouter as Router,
+    Router,
   Route,
   Link,
-  
 } from "react-router-dom";
 import Detail from "../Detail/Detail";
 import { AuthRoute } from 'react-router-auth'
 import {connect} from "react-redux";
+import history from '../../history'
 class Layout extends Component {
     state={
         isSignedIn : false
@@ -19,15 +19,15 @@ class Layout extends Component {
     componentWillReceiveProps(nextProps){
         this.setState({isSignedIn:nextProps.isSignedIn})
     }
+    componentDidUpdate(){
+        if(this.state.isSignedIn){
+            history.push("/Catalogs")
+        }
+    }
     render() {
         return (
-            <Router path="/" component={Login}>
+            <Router path="/Catalogs" component={Login} history={history}>
             <div className="container">
-                <ul>
-                <li>
-                    <Link to="/Catalogs">Catalogs</Link>
-                </li>
-                </ul>
                 <Route path="/Login" component={Login} />
                 <AuthRoute path="/AddChapter/:BookID" component={ChapterUpload} redirectTo="/login" authenticated={this.state.isSignedIn}/>
                 <AuthRoute path="/AddBook" component={UploadForm} redirectTo="/login" authenticated={this.state.isSignedIn} />

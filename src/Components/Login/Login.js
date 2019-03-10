@@ -3,10 +3,23 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { ENDPOINT } from '../../Values';
 import {connect} from "react-redux";
 import {SignIn} from "../../Redux/Action"
+import history from '../../history'
+import {
+    withRouter
+} from "react-router-dom";
 class Login extends React.Component {
+    state = {
+        error : false,
+        msg : null,
+        signedIn : false,
+    }
     Login(e){
         e.preventDefault();
         this.props.SignIn(this.email.value,this.password.value);
+    }
+    componentWillReceiveProps(nextProps){
+            
+        this.setState({error : nextProps.error,msg : nextProps.msg,signedIn : nextProps.signedIn});
     }
     render(){
         return(
@@ -22,9 +35,13 @@ class Login extends React.Component {
                                 <p>Password: </p>
                                 <input type="password" className="form-control" ref={(ref) => { this.password = ref; }}/>
                             </div>
+                            
                             <div className="col-12 pb-2 d-flex justify-content-end">
-                                    <button className="btn redstar">Login</button>
+                                <button className="btn redstar">Login</button>
                             </div>
+                            {this.state.error ? <div className="col-12 pb-2 d-flex ">
+                                <span className="">{this.state.msg}</span>
+                            </div> : null}
                         </div>
                     </form>
                 </div>
@@ -34,10 +51,12 @@ class Login extends React.Component {
 }
 const mapStateToProps = state => {
     return {
-       
+        error : state.error,
+        msg : state.msg,
+        signedIn : state.signedIn
     };
 };
 const mapDispatchToProps = {
     SignIn
 };
-export default connect(mapStateToProps, mapDispatchToProps)(Login);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login));

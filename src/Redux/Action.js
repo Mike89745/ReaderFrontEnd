@@ -1,6 +1,6 @@
 import { ENDPOINT } from "../Values";
-
-export const SIGN_IN_SUCCES = "SIGN_IN_SUCCES";
+import history from "../history"
+    export const SIGN_IN_SUCCES = "SIGN_IN_SUCCES";
 export const SIGN_IN_ERROR = "SIGN_IN_ERROR";
 export const SIGNING_IN = "SIGNING_IN";
 export function SignIn(email,password){
