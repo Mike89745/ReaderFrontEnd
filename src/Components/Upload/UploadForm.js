@@ -2,6 +2,7 @@ import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from '../../../node_modules/axios';
 import { ENDPOINT } from '../../Values';
+import {connect} from "react-redux";
 class UploadForm extends React.Component {
   constructor(props) {
     super(props);
@@ -48,6 +49,7 @@ class UploadForm extends React.Component {
     data.append("status" , this.status.value);
     data.append("tags",tags);
     data.append('file', this.uploadInput.files[0]);
+    data.append("token", this.props.token);
     const check = !this.isEmptyOrSpaces(this.title.value) 
     && !this.isEmptyOrSpaces(this.author.value) 
     && !this.isEmptyOrSpaces(this.description.value) 
@@ -156,5 +158,11 @@ class UploadForm extends React.Component {
     );
   }
 }
-
-export default UploadForm;
+const mapStateToProps = state => {
+    return {
+        token : state.token,
+    };
+};
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(UploadForm);

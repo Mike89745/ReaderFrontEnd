@@ -20,6 +20,7 @@ export const UserReducer = (state = {},action) =>{
                 signingIn : false,
                 signedIn : true,
                 error : false,
+                token : action.token
             })
         case SIGN_IN_ERROR:
             return Object.assign({}, state, {

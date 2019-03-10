@@ -2,6 +2,7 @@ import React from 'react'
 import {Line} from 'rc-progress';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ENDPOINT } from '../../../Values';
+import {connect} from "react-redux";
 class ChapterUpload extends React.Component {
     state = {
         Files : null,
@@ -44,6 +45,7 @@ class ChapterUpload extends React.Component {
             size : size,
             pages : this.files.files.length,
             type : this.UploadType.value,
+            token : this.props.token
         }
        
         fetch(ENDPOINT+ 'addChapter', {
@@ -64,6 +66,7 @@ class ChapterUpload extends React.Component {
                 data.append('file', this.files.files[i]);
                 data.append("book_id" , this.BookID.value);
                 data.append("chapterName",  this.number.value + "-" +  this.title.value.replace(/[/\\?%*:|"<>. ]/g, '-'))
+                data.append("token",this.props.token);
                 fetch(ENDPOINT+ 'upload/image', {
                     method: 'POST',
                     body: data,
@@ -85,7 +88,6 @@ class ChapterUpload extends React.Component {
         });
    }
    componentDidMount(){
-        console.log(this.props.match.params.BookID);
         this.BookID.value = this.props.match.params.BookID;
    }
    SelectChange(e){
@@ -138,4 +140,11 @@ class ChapterUpload extends React.Component {
     );
   }
 }
-export default ChapterUpload;
+const mapStateToProps = state => {
+    return {
+        token : state.token,
+    };
+};
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(ChapterUpload);

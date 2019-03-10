@@ -4,18 +4,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faTrash } from '@fortawesome/free-solid-svg-icons'
 import { ENDPOINT } from '../../../../Values';
 import Modal from "react-responsive-modal";
-export default class Chapter extends React.Component {
+import {connect} from "react-redux";
+class Chapter extends React.Component {
     state = {
         open: false,
     };
     deleteChapter =() =>{
-        fetch(ENDPOINT + 'deleteChapter/' + this.props.chapter._id).then(response =>{
+        fetch(`${ENDPOINT}deleteChapter`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({id:this.props.chapter._id,token:this.props.token}),
+        }).then((response) => {
             return response.json()
         }).then((response) => {
-           console.log(response);
-        }).catch(error => {
-            console.log(error);
-        });
+        }).catch(err => console.log(err));
         this.onCloseModal();
         this.props.RemoveChapterAt(this.props.index);
     }
@@ -46,3 +51,11 @@ export default class Chapter extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        token : state.token,
+    };
+};
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Chapter);

@@ -6,7 +6,7 @@ export const SIGNING_IN = "SIGNING_IN";
 export function SignIn(email,password){
     return function(dispatch) {
         dispatch(signingIn());
-        fetch(`${ENDPOINT}Login`, {
+        fetch(`${ENDPOINT}AdminLogin`, {
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
@@ -19,7 +19,7 @@ export function SignIn(email,password){
             if(response.err) {
                 dispatch(signingInError("Wrong password or username"));
             }else{
-                dispatch(signInSucces());
+                dispatch(signInSucces(response.token));
             }
         }).catch(err => {dispatch(signingInError("Login error, please try again later."))});
     }
@@ -29,9 +29,10 @@ function signingIn(){
         type : SIGNING_IN,
     }
 }
-function signInSucces(){
+function signInSucces(token){
     return{
         type : SIGN_IN_SUCCES,
+        token : token
     }
 }
 function signingInError(err){

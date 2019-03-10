@@ -10,7 +10,9 @@ import {
     
   } from "react-router-dom";
   import Modal from "react-responsive-modal";
-export default class Login extends React.Component {
+  import {connect} from "react-redux";
+import history from '../../history';
+class Detail extends React.Component {
     state = {
         Book : null,
         BookLoading : false,
@@ -28,14 +30,19 @@ export default class Login extends React.Component {
         });
     }
     deleteBook =()=>{
-        fetch(ENDPOINT + 'deleteBook/' + this.props.match.params.BookID).then(response =>{
+        fetch(`${ENDPOINT}deleteBook`, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: "POST",
+            body: JSON.stringify({id:this.state.Book._id,token:this.props.token}),
+        }).then((response) => {
             return response.json()
         }).then((response) => {
-           console.log(response);
-        }).catch(error => {
-            console.log(error);
-        });
+        }).catch(err => console.log(err));
         this.onCloseModal();
+        history.push("/Catalogs");
     }
     onOpenModal = () => {
         this.setState({ open: true });
@@ -138,3 +145,11 @@ export default class Login extends React.Component {
         )
     }
 }
+const mapStateToProps = state => {
+    return {
+        token : state.token,
+    };
+};
+const mapDispatchToProps = {
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Detail);
